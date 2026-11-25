@@ -88,6 +88,19 @@
     });
   }
 
+  const EXT_ICON = '<svg class="ext-icon" width="15" height="15" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.25 3.5a.75.75 0 0 0 0 1.5h3.69L5.22 9.72a.75.75 0 1 0 1.06 1.06l4.72-4.72v3.69a.75.75 0 0 0 1.5 0V4.25A.75.75 0 0 0 11.75 3H6.25z"/><path fill="currentColor" d="M3.75 5.5A.25.25 0 0 0 3.5 5.75v6.5c0 .138.112.25.25.25h6.5a.25.25 0 0 0 .25-.25V10a.75.75 0 0 1 1.5 0v2.25A1.75 1.75 0 0 1 10.25 14h-6.5A1.75 1.75 0 0 1 2 12.25v-6.5C2 4.784 2.784 4 3.75 4H6a.75.75 0 0 1 0 1.5H3.75z"/></svg>';
+
+  function setOpenLink(anchor, project) {
+    if (!anchor) return;
+    anchor.href = project.url;
+    anchor.innerHTML = EXT_ICON + "<span>Open full app</span>";
+    anchor.setAttribute("aria-label", "Open full app: " + project.name + " (opens in a new tab)");
+  }
+
+  function tabButtons() {
+    return tabs.querySelectorAll(".demo-tab");
+  }
+
   function withEmbedQuery(url) {
     try {
       const parsed = new URL(url);
@@ -100,8 +113,9 @@
   }
 
   function selectProject(project, { focus } = {}) {
+    const buttons = tabButtons();
     PROJECTS.forEach((p, i) => {
-      const btn = tabs.children[i];
+      const btn = buttons[i];
       const on = p.id === project.id;
       btn.setAttribute("aria-selected", String(on));
       btn.tabIndex = on ? 0 : -1;
@@ -111,11 +125,8 @@
     title.textContent = project.name;
     desc.textContent = project.description;
     tech.textContent = project.tech;
-    openBtn.href = project.url;
-    openBtn.textContent = project.embedUrl && project.embedUrl !== project.url
-      ? "Open full screen"
-      : "Open full screen";
-    fallbackOpen.href = project.url;
+    setOpenLink(openBtn, project);
+    setOpenLink(fallbackOpen, project);
 
     if (project.embed) {
       fallback.hidden = true;
@@ -134,6 +145,9 @@
   }
 
   PROJECTS.forEach((project, index) => {
+    const item = document.createElement("div");
+    item.className = "demo-item";
+
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "demo-tab";
@@ -156,7 +170,16 @@
       const i = (index + next + PROJECTS.length) % PROJECTS.length;
       selectProject(PROJECTS[i], { focus: true });
     });
-    tabs.appendChild(btn);
+
+    const open = document.createElement("a");
+    open.className = "btn btn-outline btn-open-full";
+    open.target = "_blank";
+    open.rel = "noopener noreferrer";
+    setOpenLink(open, project);
+
+    item.appendChild(btn);
+    item.appendChild(open);
+    tabs.appendChild(item);
   });
 
   const media = window.matchMedia("(min-width: 960px)");

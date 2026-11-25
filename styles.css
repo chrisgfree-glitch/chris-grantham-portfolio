@@ -173,6 +173,40 @@ body.nav-open .site-nav { display: flex; }
   font-size: 0.92rem;
   white-space: nowrap;
 }
+.btn-outline {
+  background: transparent;
+  color: var(--navy);
+  border: 2px solid var(--navy);
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.5rem 1rem;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.btn-outline:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+.btn-outline:focus-visible {
+  background: var(--navy);
+  color: var(--white);
+  outline: 2px solid var(--blue-2);
+  outline-offset: 3px;
+}
+.btn-outline .ext-icon {
+  flex-shrink: 0;
+}
+.btn-outline-on-dark {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+.btn-outline-on-dark:hover,
+.btn-outline-on-dark:focus-visible {
+  background: var(--white);
+  color: var(--navy);
+  border-color: var(--white);
+}
 
 /* Hero */
 .hero {
@@ -288,9 +322,28 @@ body.nav-open .site-nav { display: flex; }
   display: flex;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  gap: 0.35rem;
+  gap: 0.55rem;
   padding: 0.65rem;
   scrollbar-width: thin;
+}
+.demo-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 0 0 auto;
+  min-width: 12.5rem;
+}
+.demo-item .btn-open-full {
+  width: 100%;
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.9);
+  background: transparent;
+}
+.demo-item .btn-open-full:hover,
+.demo-item .btn-open-full:focus-visible {
+  background: var(--white);
+  color: var(--navy);
+  border-color: var(--white);
 }
 .demo-tab {
   appearance: none;
@@ -329,6 +382,10 @@ body.nav-open .site-nav { display: flex; }
   padding: 1rem 1.1rem;
   background: var(--white);
   border-bottom: 1px solid var(--line);
+}
+.demo-toolbar .btn-outline {
+  flex: 0 0 auto;
+  align-self: flex-start;
 }
 .demo-toolbar h3 {
   margin: 0 0 0.25rem;
@@ -403,6 +460,7 @@ body.nav-open .site-nav { display: flex; }
     padding: 0.85rem;
     height: 100%;
   }
+  .demo-item { min-width: 0; width: 100%; }
   .demo-tab { min-width: 0; width: 100%; }
   .demo-stage { order: 0; min-height: min(78vh, 860px); }
   .demo-frame-wrap { min-height: 0; }
