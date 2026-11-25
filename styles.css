@@ -189,10 +189,10 @@ body.nav-open .site-nav { display: flex; }
   color: var(--white);
 }
 .btn-outline:focus-visible {
-  background: var(--navy);
-  color: var(--white);
-  outline: 2px solid var(--blue-2);
-  outline-offset: 3px;
+  background: transparent;
+  color: var(--navy);
+  outline: 3px solid var(--blue-2);
+  outline-offset: 2px;
 }
 .btn-outline .ext-icon {
   flex-shrink: 0;
@@ -201,11 +201,17 @@ body.nav-open .site-nav { display: flex; }
   color: var(--white);
   border-color: rgba(255, 255, 255, 0.9);
 }
-.btn-outline-on-dark:hover,
-.btn-outline-on-dark:focus-visible {
+.btn-outline-on-dark:hover {
   background: var(--white);
   color: var(--navy);
   border-color: var(--white);
+}
+.btn-outline-on-dark:focus-visible {
+  background: transparent;
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.9);
+  outline: 3px solid var(--blue-2);
+  outline-offset: 2px;
 }
 
 /* Hero */
@@ -339,11 +345,17 @@ body.nav-open .site-nav { display: flex; }
   border-color: rgba(255, 255, 255, 0.9);
   background: transparent;
 }
-.demo-item .btn-open-full:hover,
-.demo-item .btn-open-full:focus-visible {
+.demo-item .btn-open-full:hover {
   background: var(--white);
   color: var(--navy);
   border-color: var(--white);
+}
+.demo-item .btn-open-full:focus-visible {
+  background: transparent;
+  color: var(--white);
+  border-color: #ffffff;
+  outline: 3px solid var(--blue-2);
+  outline-offset: 2px;
 }
 .demo-tab {
   appearance: none;
