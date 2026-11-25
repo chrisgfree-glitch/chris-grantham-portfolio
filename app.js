@@ -58,6 +58,16 @@
       screenshot: "assets/demos/serviceeval.jpg",
       description: "Find local home service professionals by trade and ZIP code, with an instant quote calculator and free quote requests while the directory launches.",
       tech: "Web app · PWA · Vercel"
+    },
+    {
+      id: "reelfree",
+      name: "ReelFree",
+      tagline: "Free movie and TV guide",
+      url: "https://reelfree.net",
+      embed: false,
+      screenshot: "assets/demos/reelfree.jpg",
+      description: "A free movie and TV guide that gathers legal, free-to-stream titles (Tubi, Pluto, Plex, YouTube and public-domain archives) into one clean site with genre browsing, posters and in-site playback where allowed.",
+      tech: "Web app · PWA"
     }
   ];
 
