@@ -6,6 +6,7 @@
       tagline: "3D live world globe",
       url: "https://apocalypse-tracker.com",
       embed: true,
+      embedParam: true,
       description: "A 3D globe of live conflicts, disasters, flights, satellites, and space weather from public feeds. Toggle layers, zoom the globe, and open the live sky view.",
       tech: "Next.js · 3D web globe · PWA · public data feeds"
     },
@@ -44,6 +45,7 @@
       url: "https://claim-staker.com",
       embedUrl: "https://claimstaker.vercel.app",
       embed: true,
+      embedParam: true,
       description: "Explore historic mines (USGS), active claims (BLM), equipment rentals, rail and water access, and on-device mineral photo ID from free public data. The interactive map is embedded from the live app.",
       tech: "Interactive map · PWA · USGS & BLM public data · Vercel"
     },
@@ -86,6 +88,17 @@
     });
   }
 
+  function withEmbedQuery(url) {
+    try {
+      const parsed = new URL(url);
+      parsed.searchParams.set("embed", "1");
+      return parsed.toString();
+    } catch {
+      if (/(?:^|[?&])embed=/.test(url)) return url;
+      return url + (url.includes("?") ? "&" : "?") + "embed=1";
+    }
+  }
+
   function selectProject(project, { focus } = {}) {
     PROJECTS.forEach((p, i) => {
       const btn = tabs.children[i];
@@ -108,7 +121,8 @@
       fallback.hidden = true;
       frame.hidden = false;
       frame.title = `${project.name} live demo`;
-      const src = project.embedUrl || project.url;
+      const base = project.embedUrl || project.url;
+      const src = project.embedParam ? withEmbedQuery(base) : base;
       if (frame.getAttribute("src") !== src) frame.src = src;
     } else {
       frame.hidden = true;
